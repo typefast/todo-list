@@ -8,15 +8,28 @@
 #mark an item as done
 
 class ToDoList
-  attr_accessor :completed
-  attr_reader :list
+  attr_accessor :list
+  
   def initialize
     @list = {}
-    @completed = "No"
+    #load_list()
   end
   
-  def add_item(list_item, description)
-    list[list_item] = description
+  def load_list
+    # if File.exists?("list_of_tasks.yml")
+    #   @list = YAML.load_file("list_of_tasks.yml")
+    # end
+  end
+  
+  def save
+    # File.open("list_of_tasks.yml", "w") do |file|
+    #   file.write(list.to_yaml)
+    # end
+  end
+  
+  def add_item(list_item, description, completed="No")
+    array = [description, completed]
+    list[list_item] = array
   end
   
   def delete_item(list_item)
@@ -27,9 +40,8 @@ class ToDoList
     end
   end
   
-  def done(list_item)
-    #change instance variable
-    @completed = "Yes" 
+  def done(list_item, completed="Yes")
+    list[list_item][1] = completed
   end
   
   def list_tasks
@@ -37,19 +49,23 @@ class ToDoList
     puts "TASK".ljust(20) + "DESCRIPTION".ljust(30) + "Completed"
     puts "-" * 60
     list.each do |task, description|
-      puts "#{task}".ljust(20) + "#{description}".ljust(30) + " - #{completed}"
+      puts "#{task}".ljust(20) + "#{description[0]}".ljust(30) + " -#{description[1]} "
       puts "-" * 60
     end
   end
 end
 
 list = ToDoList.new
-list.add_item("buy petrol", "Drive to petrol station")
-list.add_item("buy cigars", "Don't Smoke kids")
+list.add_item("added", "added")
+list.add_item("addbbbb", "added")
+list.add_item("addedccccccc", "added")
 list.list_tasks
-list.delete_item("buy cigars")
-list.delete_item("buy stuff")
-list.done("buy petrol")
+list.done("added")
+list.delete_item("addbbbb")
 list.list_tasks
+
+
+
+
 
 

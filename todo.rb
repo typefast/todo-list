@@ -16,9 +16,21 @@ class ToDoList
   def add_item(list_item, description)
     list[list_item] = description
   end
+  
+  def list_tasks
+    puts "TASK".ljust(20) + "DESCRIPTION"
+    puts "-" * 50
+    list.each do |task, description|
+      puts "#{task}".ljust(20) + "#{description}"
+      puts "-" * 50
+    end
+  end
 end
 
 list = ToDoList.new
 list.add_item("buy petrol", "Drive to petrol station")
-p list.list
+list.add_item("buy Cigars", "Don't Smoke kids")
+
+list.list_tasks
+
 

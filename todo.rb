@@ -17,7 +17,16 @@ class ToDoList
     list[list_item] = description
   end
   
+  def delete_item(list_item)
+    if list.has_key?(list_item)
+      list.delete(list_item)
+    else 
+      puts "No task was found with the name #{list_item}."
+    end
+  end
+  
   def list_tasks
+    puts "\n\n"
     puts "TASK".ljust(20) + "DESCRIPTION"
     puts "-" * 50
     list.each do |task, description|
@@ -29,8 +38,10 @@ end
 
 list = ToDoList.new
 list.add_item("buy petrol", "Drive to petrol station")
-list.add_item("buy Cigars", "Don't Smoke kids")
-
+list.add_item("buy cigars", "Don't Smoke kids")
+list.list_tasks
+list.delete_item("buy cigars")
+list.delete_item("buy stuff")
 list.list_tasks
 
 

@@ -1,30 +1,52 @@
-#todolist
-#create a hash to store the list
-#add an item to the list
-#display the list
-#delete an item from the list
-#save the list
-#load the list - on startup? check previous projects
-#mark an item as done
 
 class ToDoList
   attr_accessor :list
   
   def initialize
     @list = {}
-    #load_list()
+    run()
   end
   
-  def load_list
-    # if File.exists?("list_of_tasks.yml")
-    #   @list = YAML.load_file("list_of_tasks.yml")
-    # end
-  end
-  
-  def save
-    # File.open("list_of_tasks.yml", "w") do |file|
-    #   file.write(list.to_yaml)
-    # end
+  def run
+    while true
+      puts "What do you want to do?: "
+      puts "1. add item"
+      puts "2. list tasks"
+      puts "3. mark done"
+      puts "4. delete item"
+      puts "5. to exit"
+      action = gets.chomp.downcase
+      
+    case action
+    when "1"
+      puts "Add item title: "
+      title = gets.chomp
+      puts "Add short description: "
+      description = gets.chomp
+      add_item(title, description)
+      puts "Item added\n\n"
+    when "2"
+      list_tasks
+      puts "\n"
+    when "3"
+      puts "What task do you want to mark as done?"
+      puts "Enter the title of the task: "
+      task = gets.chomp.downcase
+      done(task)
+      puts "Task: #{task} updated.\n\n"
+    when "4"
+      puts "What task do you want to delete?"
+      puts "Enter the title of the task: "
+      task = gets.chomp.downcase
+      delete_item(task)
+      puts "Task #{task} deleted.\n\n"
+    when "5"
+    puts "Thank you, Goodbye "
+      exit(0)  
+    else 
+      puts "That is not an option. Enter a number."
+    end
+    end
   end
   
   def add_item(list_item, description, completed="No")
@@ -56,13 +78,7 @@ class ToDoList
 end
 
 list = ToDoList.new
-list.add_item("added", "added")
-list.add_item("addbbbb", "added")
-list.add_item("addedccccccc", "added")
-list.list_tasks
-list.done("added")
-list.delete_item("addbbbb")
-list.list_tasks
+
 
 
 

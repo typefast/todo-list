@@ -20,9 +20,9 @@ class ToDoList
     case action
     when "1"
       puts "Add item title: "
-      title = gets.chomp
+      title = gets.chomp.downcase
       puts "Add short description: "
-      description = gets.chomp
+      description = gets.chomp.downcase
       add_item(title, description)
       puts "Item added\n\n"
     when "2"
@@ -39,7 +39,6 @@ class ToDoList
       puts "Enter the title of the task: "
       task = gets.chomp.downcase
       delete_item(task)
-      puts "Task #{task} deleted.\n\n"
     when "5"
     puts "Thank you, Goodbye "
       exit(0)  
@@ -57,6 +56,7 @@ class ToDoList
   def delete_item(list_item)
     if list.has_key?(list_item) #check if the given key exists?
       list.delete(list_item)
+      puts "Task #{list_item} deleted.\n\n"
     else 
       puts "No task was found with the name #{list_item}."
     end
